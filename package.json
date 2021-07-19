@@ -1,0 +1,25 @@
+{
+  "name": "xsollaTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "fastify": "^3.19.0",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node index.js"
+  }
+}
