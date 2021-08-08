@@ -1,12 +1,14 @@
 const mongoose = require("mongoose")
-const autoIncrement = require('mongoose-auto-increment');
+const autoIncrement = require('mongoose-auto-increment')
+
+const config = require('../config.json')
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(config.MONGODB_URI)
 autoIncrement.initialize(mongoose.connection)
 
 mongoose.connection.on('connected', (connection) => console.log('MongoDB connected'))

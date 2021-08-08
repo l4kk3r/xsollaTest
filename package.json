@@ -10,16 +10,11 @@
     "fastify": "^3.19.0",
     "graphql": "^15.5.1",
     "mongoose": "^5.13.5",
-    "pg": "^8.6.0",
-    "sequelize": "^6.6.5",
-    "sequelize-cli": "^6.2.0",
+    "mongoose-auto-increment": "^5.0.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   },
-  "devDependencies": {
-    "dotenv": "^10.0.0",
-    "nodemon": "^2.0.12"
-  },
+  "devDependencies": {},
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"

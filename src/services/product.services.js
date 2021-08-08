@@ -10,19 +10,12 @@ module.exports.listProducts = async (req, res) => {
 
         const filters = { type }
         Object.keys(filters).forEach(key => !filters[key] ? delete filters[key] : null)
+
+        const products = await Product.find({ price: { $gte: minPrice || 0, $lte: maxPrice || Infinity }, ...filters })
     
-        const products = await Product.findAll({
-            where: {
-                price: {
-                    [Op.gte]: minPrice || 0,
-                    [Op.lte]: maxPrice || 10 ** 9
-                },
-                ...filters
-            }
-        })
-    
-        res.json({ success: true, products })
+        res.json(products)
     } catch (e) {
+        console.log(e)
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
 }
@@ -41,7 +34,7 @@ module.exports.updateProduct = async (req, res) => {
 
         await Product.findByIdAndUpdate(id, newFields)
 
-        res.json({ success: true })
+        res.status(204).send()
     } catch (e) {
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
@@ -61,7 +54,8 @@ module.exports.createProduct = async (req, res) => {
         if (productWithSameSKU) return res.status(400).json({ message: 'Продукт с данным SKU уже существует'  })
 
         await Product.create({ name, sku, type, price })
-        res.json({ success: true })
+
+        res.status(201).send()
     } catch (e) {
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
@@ -80,7 +74,8 @@ module.exports.editProduct = async (req, res) => {
         if (productWithSameSKU) return res.status(400).json({ message: 'Продукт с данным SKU уже существует'  })
 
         await Product.create({ name, sku, type, price })
-        res.json({ success: true })
+
+        res.status(204).send()
     } catch (e) {
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
@@ -96,7 +91,7 @@ module.exports.deleteProduct = async (req, res) => {
 
         if (!result) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 
-        res.json({ success: true })
+        res.status(204).send()
     } catch (e) {
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
@@ -112,7 +107,7 @@ module.exports.getProduct = async (req, res) => {
 
         if (!product) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 
-        res.json({ product })
+        res.json(product)
     } catch (e) {
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
