@@ -1,40 +1,22 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  Product.init({
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    sku: {
-      type: DataTypes.STRING,
-      unique: true
-    },
-    name: {
-        type: DataTypes.STRING
-    },
-    type: {
-      type: DataTypes.STRING
-    },
-    price: {
-      type: DataTypes.INTEGER
-    }
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
-  return Product;
-};
+const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment')
+
+const { Schema } = mongoose
+
+const productSchema = new Schema({
+  _id: Number,
+  sku: String,
+  name: String,
+  type: String,
+  price: Number
+}, {
+  versionKey: false,
+  timestamps: true
+})
+
+productSchema.plugin(autoIncrement.plugin, { 
+  model: 'User',
+  startAt: 1
+})
+
+mongoose.model("Product", productSchema)

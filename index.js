@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const swaggerUI = require('swagger-ui-express')
-const { sequelize } = require('./src/models')
 
 const PORT = process.env.PORT || 8080
 
@@ -21,6 +20,5 @@ app.use('/product', require('./src/routes/product.routes'))
 
 /* APP STARTUP */
 app.listen(PORT, async () => {
-    await sequelize.sync({ alter: true })
     console.log(`App is running on PORT ${PORT}`)
 })
