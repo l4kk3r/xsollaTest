@@ -7,8 +7,8 @@ const productValidators = require('../validators/product.validators')
 
 router.get('/', productServices.listProducts)
 router.post('/', productValidators.createProductValidator, productServices.createProduct)
-router.delete('/:id', productServices.deleteProduct)
-router.get('/:id', productServices.getProduct)
-router.patch('/:id', productServices.updateProduct)
+router.delete('/:_id', productServices.deleteProduct)
+router.get('/:_id', productServices.getProduct)
+router.patch('/:_id', productServices.updateProduct)
 
 module.exports = router

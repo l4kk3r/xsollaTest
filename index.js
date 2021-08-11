@@ -1,4 +1,6 @@
 const express = require('express')
+const expressGraphql = require('express-graphql').graphqlHTTP
+const { GraphQLID, GraphQLString, GraphQLObjectType, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = require('graphql')
 const cors = require('cors')
 const swaggerUI = require('swagger-ui-express')
 
@@ -20,6 +22,10 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs))
 
 /* ROUTES */
 app.use('/product', require('./src/routes/product.routes'))
+
+/* GRAPHQL */
+const graphqlSetup = require('./connections/GraphQL')
+app.use("/graphql", graphqlSetup)
 
 /* APP STARTUP */
 app.listen(PORT, async () => {

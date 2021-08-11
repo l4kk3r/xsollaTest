@@ -27,12 +27,12 @@ module.exports.updateProduct = async (req, res) => {
         return res.status(400).json({ message: errors.array()[0].msg })
         }
 
-        const { id } = req.params
+        const { _id } = req.params
         const { name, sku, type, price } = req.body
-        const newFields = { name, sku, type, price }
-        Object.keys(newFields).forEach(key => !key ? delete filters.key : null)
+        let newFields = { name, sku, type, price }
+        newFields = JSON.parse(JSON.stringify(newFields))
 
-        await Product.findByIdAndUpdate(id, newFields)
+        await Product.updateOne({ _id }, { $set: newFields })
 
         res.status(204).send()
     } catch (e) {
@@ -83,11 +83,11 @@ module.exports.editProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
     try {
-        const { id } = req.params
+        const { _id } = req.params
 
-        if (!isNumeric(id)) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
+        if (!isNumeric(_id)) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 
-        const result = await Product.findByIdAndDelete(id)
+        const result = await Product.findByIdAndDelete(_id)
 
         if (!result) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 
@@ -99,11 +99,11 @@ module.exports.deleteProduct = async (req, res) => {
 
 module.exports.getProduct = async (req, res) => {
     try {
-        const { id } = req.params
+        const { _id } = req.params
 
-        if (!isNumeric(id)) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
+        if (!isNumeric(_id)) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 
-        const product = await Product.findById(id)
+        const product = await Product.findById(_id)
 
         if (!product) return res.status(404).json({ message: 'Продукт с таким id не существует ;(' })
 

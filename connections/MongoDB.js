@@ -14,4 +14,4 @@ autoIncrement.initialize(mongoose.connection)
 mongoose.connection.on('connected', (connection) => console.log('MongoDB connected'))
 mongoose.connection.on('error', () => console.log('Failed to connect MongoDB'))
 
-require('../src/models/Product')
+require('../src/models/db/Product')
