@@ -4,14 +4,17 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "gamieMarket API",
+            title: "iceItems API",
             version: "1.0.0",
-            description: "gamieMarket - best e-commerce site for gaming",
+            description: "iceItems - best marketplace for gaming",
             contact: {
                 name: "Tim Vaulin"
             }
         },
         servers: [
+            {
+                url: "https://iceitems.herokuapp.com/"
+            },
             {
                 url: "http://localhost:8080"
             }
