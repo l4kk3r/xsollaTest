@@ -5,6 +5,7 @@ const { Schema } = mongoose
 
 const productSchema = new Schema({
   _id: Number,
+  seller_id: Number,
   sku: String,
   name: String,
   type: String,

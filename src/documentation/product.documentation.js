@@ -1,18 +1,27 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ * security:
+ *   - bearerAuth: []   
+ */
+
+/**
+ * @swagger
+ * components:
  *   schemas:
  *     Product:
  *       type: object
  *       required:
- *         - id
  *         - sku
  *         - name
  *         - type
  *         - price
  *       properties:
- *         id:
- *           type: integer
  *         sku:
  *           type: string
  *         name:
@@ -22,7 +31,6 @@
  *         price:
  *           type: integer
  *       example:
- *         id: 20
  *         sku: fortnite-vbucks-10
  *         name: 10 Vbucks
  *         type: Gaming Currency
@@ -40,6 +48,8 @@
  * @swagger
  * /product:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Product]
  *     parameters:
  *       - name: type
@@ -66,6 +76,8 @@
  * @swagger
  * /product:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Product]
  *     requestBody:
  *       required: true
@@ -82,6 +94,8 @@
  * @swagger
  * /product/{id}:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Product]
  *     parameters:
  *       - name: id
@@ -105,6 +119,8 @@
  * @swagger
  * /product/{id}:
  *   delete:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Product]
  *     parameters:
  *       - name: id
@@ -122,6 +138,8 @@
  * @swagger
  * /product/{id}:
  *   patch:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Product]
  *     parameters:
  *       - name: id

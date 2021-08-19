@@ -1,3 +1,9 @@
 {
-    "MONGODB_URI": "mongodb+srv://admin1:Vw6bfdMl9lcmwqr0@projproj.gehyr.mongodb.net/simpleDB?retryWrites=true&w=majority"
+    "MONGODB_URI": "mongodb+srv://admin1:Vw6bfdMl9lcmwqr0@projproj.gehyr.mongodb.net/simpleDB?retryWrites=true&w=majority",
+    "REDIS_HOST": "ec2-54-78-234-130.eu-west-1.compute.amazonaws.com",
+    "REDIS_PORT": 16319,
+    "REDIS_PASSWORD": "p953cdfec96a0a457c41cebc7714424b79db2d5d3a9d3778776f7f3f939bfef73",
+    "SESSION_SECRET": "12kaskks2323sdsdsd",
+    "JWT_ACCESS_TOKEN_SECRET": "2j32j3j23j23jsd",
+    "JWT_REFRESH_TOKEN_SECRET": "932ikk3wkkwekwek"
 }

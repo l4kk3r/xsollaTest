@@ -1,11 +1,11 @@
 const expressGraphql = require('express-graphql').graphqlHTTP
 const { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLSchema, GraphQLList, GraphQLNonNull } = require('graphql')
-const isNumeric = require('../src/helpers/isNumeric')
+const isNumeric = require('@src/helpers/isNumeric')
 
 const mongoose = require('mongoose')
 const Product = mongoose.model('Product')
 
-const productType = require('../src/models/graphql/Product')
+const productType = require('@src/models/graphql/Product')
 
 const queryRootType = new GraphQLObjectType({
     name: 'Query',
