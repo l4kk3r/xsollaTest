@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const Product = mongoose.model("Product")
-const { validationResult } = require('express-validator');
+const { validationResult } = require('express-validator')
+
+let mqChannel = null
+const rabbitMQ = require('@src/connections/RabbitMQ').then(ans => mqChannel = ans)
 
 const isNumeric = require('@src/helpers/isNumeric')
 
@@ -11,17 +14,28 @@ module.exports.create = async (req, res) => {
             return res.status(400).json({ message: errors.array()[0].msg })
         }
 
-        const { name, sku, type, price } = req.body
-        const seller_id = req.userId
+        const data = {...req.body}
+        const { sku, landing } = data
+
+        data.seller_id = req.userId
+        data.landing = {
+            url: landing,
+            confirmed: false
+        }
 
         const productWithSameSKU = await Product.findOne({ sku })
 
         if (productWithSameSKU) return res.status(400).json({ message: 'Продукт с данным SKU уже существует'  })
 
-        await Product.create({ seller_id, name, sku, type, price })
+        const product = new Product(data)
+        await product.save()
+
+        const queueMessage = Buffer.from(JSON.stringify(product))
+        await mqChannel.publish('newProduct', 'np1', queueMessage)
 
         res.status(201).send()
     } catch (e) {
+        console.log(e)
         return res.status(500).json({ message: 'Iternal Server Error' })
     }
 }

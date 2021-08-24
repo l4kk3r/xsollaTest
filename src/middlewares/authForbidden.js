@@ -3,24 +3,19 @@ const jwt = require('jsonwebtoken')
 const config = require('@root/config.json')
 
 const checkTokenAuth = async (req) => {
-    console.log('aa')
     const headerData = req.headers.authorization && req.headers.authorization.split(' ')
-    console.log({ headerData })
 
     const token = headerData && headerData[1]
-    console.log({ token })
     if (!token) return false
 
     let data
     try {
-        const secret = config.JWT_ACCESS_TOKEN_SECRET
-        console.log({ secret })
         data = await jwt.verify(token, config.JWT_ACCESS_TOKEN_SECRET)
     } catch {
         data = await jwt.verify(token, config.JWT_ACCESS_TOKEN_SECRET)
         return false
     }
-    console.log({ data })
+
     const userId = data && data._id
 
     return userId

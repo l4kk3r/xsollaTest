@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 const config = require('@root/config.json')
 
 const checkTokenAuth = async (req) => {
-    console.log(req.headers)
     const headerData = req.headers.authorization && req.headers.authorization.split(' ')
 
     const token = headerData && headerData[1]

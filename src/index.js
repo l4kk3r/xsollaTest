@@ -18,6 +18,9 @@ require('@src/connections/Redis')
 /* DATABASE */
 require('@src/connections/MongoDB')
 
+/* RABBITMQ */
+require('@src/connections/RabbitMQ')
+
 /* SESSION */
 const expressSession = require('@src/connections/ExpressSession')
 app.use(expressSession)

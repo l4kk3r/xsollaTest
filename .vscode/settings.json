@@ -1,0 +1,7 @@
+{
+    "parameterHints.hintingType": "variableOnly",
+    "workbench.colorCustomizations": {
+        "parameterHints.hintForeground": "#ADBEC5",
+        "parameterHints.hintBackground": "#1E2C31"
+    }
+}
